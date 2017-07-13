@@ -2,23 +2,8 @@ import 'babel-polyfill';
 import { createStore } from 'redux';
 import { ADD_TODO, TOGGLE_TODO, VISIBILITY_FILTER } from './actionTypes';
 
-// {
-//     type: ADD_TODO,
-//     text: 'Build my first Redux app'
-// }
+// Action Creators
 
-// {
-//     type: TOGGLE_TODO,
-//     index:5
-// }
-
-// {
-//   type: SET_VISIBILITY_FILTER,
-//   filter: SHOW_COMPLETED
-// }
-
-
-// Action Creator
 function addTodo(text) {
     return {
         type: ADD_TODO,
@@ -26,4 +11,16 @@ function addTodo(text) {
     }
 }
 
-dispatch(addTodo(text));
+function toggleTodo(index) {
+    return {
+        type: TOGGLE_TODO,
+        index
+    }
+}
+
+function setVisibilityFilter(filter) {
+    return {
+        type: VISIBILITY_FILTER,
+        filter
+    }
+}
