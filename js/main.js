@@ -1,26 +1,16 @@
 import 'babel-polyfill';
 import { createStore } from 'redux';
-import { ADD_TODO, TOGGLE_TODO, VISIBILITY_FILTER } from './actionTypes';
+import { VisibilityFilters } from './actions';
 
-// Action Creators
-
-function addTodo(text) {
-    return {
-        type: ADD_TODO,
-        text
-    }
+const initialState = {
+    visibilityFilter: VisibilityFilters.SHOW_ALL,
+    todos: []
 }
 
-function toggleTodo(index) {
-    return {
-        type: TOGGLE_TODO,
-        index
+function todoApp(state, action) {
+    if (typeof state === "undefined") {
+        return initialState;
     }
-}
-
-function setVisibilityFilter(filter) {
-    return {
-        type: VISIBILITY_FILTER,
-        filter
-    }
+    // don't handle any actions for now
+    return state;
 }
