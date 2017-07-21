@@ -1,13 +1,8 @@
 import 'babel-polyfill';
-import { createStore } from 'redux';
-import { VisibilityFilters, ADD_TODO, TOGGLE_TODO } from './actions';
+import { createStore, combineReducers } from 'redux';
+import { VisibilityFilters, ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER } from './actions';
 
 const { SHOW_ALL } = VisibilityFilters;
-
-const initialState = {
-    visibilityFilter: VisibilityFilters.SHOW_ALL,
-    todos: []
-}
 
 // Smaller reducers
 
@@ -23,43 +18,46 @@ function visibilityFilter(state = SHOW_ALL, action) {
 function todos(state = [], action) {
     switch (action.type) {
         case ADD_TODO:
-            return Object.assign({}, state, {
-                todos: [
-                    ...state.todos,
-                    {
-                        text: action.text,
-                        completed: false
-                    }
-                ]
-            })
+            return [
+                ...state,
+                {
+                    text: action.text,
+                    completed: false
+                }
+            ]
         case TOGGLE_TODO:
-            return Object.assign({}, state,
-                state.todos.map((todo, index) => {
-                    if (index === action.index) {
-                        return Object.assign({}, todo, {
-                            completed: !todo.completed
-                        })
-                    }
-                    return todo
-                })
-            )
+            return state.map((todo, index) => {
+                if (index === action.index) {
+                    return Object.assign({}, todo, {
+                        completed: !todo.completed
+                    })
+                }
+                return todo
+            })
         default:
             return state
     }
 }
 
 // Main reducer (Reducer Composition)
-function todoApp(state = initialState, action) {
-    switch (action.type) {
-        case SET_VISIBILITY_FILTER:
-            return Object.assign({}, state, {
-                visibilityFilter: visibilityFilter(state.visibilityFilter, action)
-            })
-        case ADD_TODO:
-        case TOGGLE_TODO:
-            return Object.assign({}, state, {
-                todos: todos(state.todos, action)
-            })
-    }
-    return state
-}
+
+const todoApp = combineReducers({
+    visibilityFilter,
+    todos
+})
+
+export default todoApp
+
+// **
+// How combineReducers() works:
+// **
+
+// function todoApp(state = {}, action) {
+//     return {
+//         visibilityFilter: visibilityFilter(state.visibilityFilter, action),
+//         todos: todos(state.todos, action)
+//     }
+// }
+
+// **
+// **
