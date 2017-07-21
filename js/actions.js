@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, VISIBILITY_FILTER } from './actionTypes';
+import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER } from './actionTypes';
 
 export const VisibilityFilters = {
   SHOW_ALL: 'SHOW_ALL',
