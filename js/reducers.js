@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
-import { VisibilityFilters, ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER } from './actions';
+import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER } from './actionTypes';
+import { VisibilityFilters } from './actions';
 
 const { SHOW_ALL } = VisibilityFilters;
 
 // Smaller reducers
 
 function visibilityFilter(state = SHOW_ALL, action) {
+    console.log("visibilityFilter reducer called");
     switch (action.type) {
         case SET_VISIBILITY_FILTER:
             return action.filter
@@ -15,8 +17,9 @@ function visibilityFilter(state = SHOW_ALL, action) {
 }
 
 function todos(state = [], action) {
+    console.log("todos reducer called");
     switch (action.type) {
-        case ADD_TODO:
+        case 'ADD_TODO':
             return [
                 ...state,
                 {
