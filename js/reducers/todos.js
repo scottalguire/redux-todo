@@ -1,9 +1,9 @@
-import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER } from '../actions/actionTypes';
+import { ADD_TODO, TOGGLE_TODO } from '../actions/actionTypes';
 
 function todos(state = [], action) {
     console.log("todos reducer called");
     switch (action.type) {
-        case 'ADD_TODO':
+        case ADD_TODO:
             return [
                 ...state,
                 {
