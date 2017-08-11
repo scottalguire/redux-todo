@@ -18,7 +18,7 @@ return (
     )
 }
 
-Link.Proptypes = {
+Link.proptypes = {
     active: Proptypes.bool.isRequired,
     children: Proptypes.node.isRequired,
     onCLick: Proptypes.func.isRequired
